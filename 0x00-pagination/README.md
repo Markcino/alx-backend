@@ -1,63 +1,55 @@
+# 0x00. Pagination
 
+| `Back-end` |
 
-Curriculum
-Short Specializations Average: 53.94%
-0x00. Pagination
-Back-end
+![meme1](./images/meme1.png)
+![meme2](./images/meme2.png)
+![meme3](./images/meme3.png)
 
-    Weight: 1
-    Ongoing second chance project - started Jun 20, 2024 3:00 AM, must end by Jun 29, 2024 3:00 AM
-    An auto review will be launched at the deadline
+## Resources
 
-In a nutshell…
+### Read or Watch
 
-    Auto QA review: 0.0/15 mandatory
-    Altogether:  0.0%
-        Mandatory: 0.0%
-        Optional: no optional tasks
++ [REST API Design: Pagination](https://intranet.alxswe.com/rltoken/7Kdzi9CH1LdSfNQ4RaJUQw)
 
-Resources
++ [HATEOAS](https://intranet.alxswe.com/rltoken/tfzcEbTSdMYSYxsspJH_oA)
 
-Read or watch:
-
-    REST API Design: Pagination
-    HATEOAS
-
-Learning Objectives
+## Learning Objectives
 
 At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
 
-    How to paginate a dataset with simple page and page_size parameters
-    How to paginate a dataset with hypermedia metadata
-    How to paginate in a deletion-resilient manner
++ How to paginate a dataset with simple page and page_size parameters
++ How to paginate a dataset with hypermedia metadata
++ How to paginate in a deletion-resilient manner
 
-Requirements
+## Requirements
 
-    All your files will be interpreted/compiled on Ubuntu 18.04 LTS using python3 (version 3.7)
-    All your files should end with a new line
-    The first line of all your files should be exactly #!/usr/bin/env python3
-    A README.md file, at the root of the folder of the project, is mandatory
-    Your code should use the pycodestyle style (version 2.5.*)
-    The length of your files will be tested using wc
-    All your modules should have a documentation (python3 -c 'print(__import__("my_module").__doc__)')
-    All your functions should have a documentation (python3 -c 'print(__import__("my_module").my_function.__doc__)'
-    A documentation is not a simple word, it’s a real sentence explaining what’s the purpose of the module, class or method (the length of it will be verified)
-    All your functions and coroutines must be type-annotated.
++ All your files will be interpreted/compiled on Ubuntu 18.04 LTS using `python3` (version 3.7)
++ All your files should end with a new line
++ The first line of all your files should be exactly `#!/usr/bin/env python3`
++ A `README.md` file, at the root of the folder of the project, is mandatory
++ Your code should use the `pycodestyle` style (version 2.5.*)
++ The length of your files will be tested using `wc`
++ All your modules should have a documentation (`python3 -c 'print(__import__("my_module").__doc__)'`)
++ All your functions should have a documentation (`python3 -c 'print(__import__("my_module").my_function.__doc__)'`
++ A documentation is not a simple word, it’s a real sentence explaining what’s the purpose of the module, class or method (the length of it will be verified)
++ All your functions and coroutines must be type-annotated.
 
-Setup: Popular_Baby_Names.csv
+## Setup: `Popular_Baby_Names.csv`
 
-use this data file for your project
-Tasks
-0. Simple helper function
-mandatory
-Score: 0.0% (Checks completed: 0.0%)
+[use this data](https://intranet.alxswe.com/rltoken/NBLY6mdKDBR9zWvNADwjjg) file for your project
 
-Write a function named index_range that takes two integer arguments page and page_size.
+## Tasks
+
+### 0. Simple helper function
+
+Write a function named `index_range` that takes two integer arguments `page` and `page_size`.
 
 The function should return a tuple of size two containing a start index and an end index corresponding to the range of indexes to return in a list for those particular pagination parameters.
 
 Page numbers are 1-indexed, i.e. the first page is page 1.
 
+```
 bob@dylan:~$ cat 0-main.py
 #!/usr/bin/env python3
 """
@@ -80,19 +72,15 @@ bob@dylan:~$ ./0-main.py
 <class 'tuple'>
 (30, 45)
 bob@dylan:~$
+```
 
-Repo:
+solution - [0-simple_helper_function.py](./0-simple_helper_function.py)
 
-    GitHub repository: alx-backend
-    Directory: 0x00-pagination
-    File: 0-simple_helper_function.py
+### 1. Simple pagination
 
-1. Simple pagination
-mandatory
-Score: 0.0% (Checks completed: 0.0%)
+Copy `index_range` from the previous task and the following class into your code
 
-Copy index_range from the previous task and the following class into your code
-
+```python
 import csv
 import math
 from typing import List
@@ -119,14 +107,16 @@ class Server:
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
             pass
+```
 
-Implement a method named get_page that takes two integer arguments page with default value 1 and page_size with default value 10.
+Implement a method named `get_page` that takes two integer arguments `page` with default value 1 and `page_size` with default value 10.
 
-    You have to use this CSV file (same as the one presented at the top of the project)
-    Use assert to verify that both arguments are integers greater than 0.
-    Use index_range to find the correct indexes to paginate the dataset correctly and return the appropriate page of the dataset (i.e. the correct list of rows).
-    If the input arguments are out of range for the dataset, an empty list should be returned.
++ You have to use this [CSV file](https://intranet.alxswe.com/rltoken/NBLY6mdKDBR9zWvNADwjjg) (same as the one presented at the top of the project)
++ Use `assert` to verify that both arguments are integers greater than 0.
++ Use `index_range` to find the correct indexes to paginate the dataset correctly and return the appropriate page of the dataset (i.e. the correct list of rows).
++ If the input arguments are out of range for the dataset, an empty list should be returned.
 
+```
 bob@dylan:~$  wc -l Popular_Baby_Names.csv 
 19419 Popular_Baby_Names.csv
 bob@dylan:~$  
@@ -180,33 +170,28 @@ AssertionError raised when page and/or page_size are not ints
 [['2016', 'FEMALE', 'ASIAN AND PACIFIC ISLANDER', 'Olivia', '172', '1'], ['2016', 'FEMALE', 'ASIAN AND PACIFIC ISLANDER', 'Chloe', '112', '2'], ['2016', 'FEMALE', 'ASIAN AND PACIFIC ISLANDER', 'Sophia', '104', '3']]
 [['2016', 'FEMALE', 'ASIAN AND PACIFIC ISLANDER', 'Emily', '99', '4'], ['2016', 'FEMALE', 'ASIAN AND PACIFIC ISLANDER', 'Mia', '79', '5']]
 []
-bob@dylan:~$ 
+bob@dylan:~$
+```
 
-Repo:
+solution - [1-simple_pagination.py](./1-simple_pagination.py)
 
-    GitHub repository: alx-backend
-    Directory: 0x00-pagination
-    File: 1-simple_pagination.py
-
-2. Hypermedia pagination
-mandatory
-Score: 0.0% (Checks completed: 0.0%)
+### 2. Hypermedia pagination
 
 Replicate code from the previous task.
 
-Implement a get_hyper method that takes the same arguments (and defaults) as get_page and returns a dictionary containing the following key-value pairs:
+Implement a `get_hyper` method that takes the same arguments (and defaults) as `get_page` and returns a dictionary containing the following key-value pairs:
 
-    page_size: the length of the returned dataset page
-    page: the current page number
-    data: the dataset page (equivalent to return from previous task)
-    next_page: number of the next page, None if no next page
-    prev_page: number of the previous page, None if no previous page
-    total_pages: the total number of pages in the dataset as an integer
++ `page_size`: the length of the returned dataset page
++ `page`: the current page number
++ `data`: the dataset page (equivalent to return from previous task)
++ `next_page`: number of the next page, None if no next page
++ `prev_page`: number of the previous page, None if no previous page
++ `total_pages`: the total number of pages in the dataset as an integer
+Make sure to reuse `get_page` in your implementation.
 
-Make sure to reuse get_page in your implementation.
+You can use the `math` module if necessary.
 
-You can use the math module if necessary.
-
+```
 bob@dylan:~$ cat 2-main.py
 #!/usr/bin/env python3
 """
@@ -235,21 +220,17 @@ bob@dylan:~$ ./2-main.py
 ---
 {'page_size': 0, 'page': 3000, 'data': [], 'next_page': None, 'prev_page': 2999, 'total_pages': 195}
 bob@dylan:~$ 
+```
 
-Repo:
+solution - [2-hypermedia_pagination.py](./2-hypermedia_pagination.py)
 
-    GitHub repository: alx-backend
-    Directory: 0x00-pagination
-    File: 2-hypermedia_pagination.py
-
-3. Deletion-resilient hypermedia pagination
-mandatory
-Score: 0.0% (Checks completed: 0.0%)
+### 3. Deletion-resilient hypermedia pagination
 
 The goal here is that if between two queries, certain rows are removed from the dataset, the user does not miss items from dataset when changing page.
 
-Start 3-hypermedia_del_pagination.py with this code:
+Start `3-hypermedia_del_pagination.py` with this code:
 
+```python
 #!/usr/bin/env python3
 """
 Deletion-resilient hypermedia pagination
@@ -293,21 +274,23 @@ class Server:
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
             pass
+```
 
-Implement a get_hyper_index method with two integer arguments: index with a None default value and page_size with default value of 10.
+Implement a `get_hyper_index` method with two integer arguments: `index` with a `None` default value and `page_size` with default value of 10.
 
-    The method should return a dictionary with the following key-value pairs:
-        index: the current start index of the return page. That is the index of the first item in the current page. For example if requesting page 3 with page_size 20, and no data was removed from the dataset, the current index should be 60.
-        next_index: the next index to query with. That should be the index of the first item after the last item on the current page.
-        page_size: the current page size
-        data: the actual page of the dataset
++ The method should return a dictionary with the following key-value pairs:
+    + `index`: the current start index of the return page. That is the index of the first item in the current page. For example if requesting page 3 with `page_size` 20, and no data was removed from the dataset, the current index should be 60.
+    + `next_index`: the next index to query with. That should be the index of the first item after the last item on the current page.
+    + `page_size`: the current page size
+    + `data`: the actual page of the dataset
 
-Requirements/Behavior:
+**Requirements/Behavior:**
 
-    Use assert to verify that index is in a valid range.
-    If the user queries index 0, page_size 10, they will get rows indexed 0 to 9 included.
-    If they request the next index (10) with page_size 10, but rows 3, 6 and 7 were deleted, the user should still receive rows indexed 10 to 19 included.
++ Use `assert` to verify that `index` is in a valid range.
++ If the user queries index 0, `page_size` 10, they will get rows indexed 0 to 9 included.
++ If they request the next index (10) with `page_size` 10, but rows 3, 6 and 7 were deleted, the user should still receive rows indexed 10 to 19 included.
 
+```
 bob@dylan:~$ cat 3-main.py
 #!/usr/bin/env python3
 """
@@ -357,12 +340,7 @@ Nb items: 19418
 Nb items: 19417
 {'index': 3, 'data': [['2016', 'FEMALE', 'ASIAN AND PACIFIC ISLANDER', 'Emily', '99', '4'], ['2016', 'FEMALE', 'ASIAN AND PACIFIC ISLANDER', 'Mia', '79', '5']], 'page_size': 2, 'next_index': 6}
 {'index': 5, 'data': [['2016', 'FEMALE', 'ASIAN AND PACIFIC ISLANDER', 'Mia', '79', '5'], ['2016', 'FEMALE', 'ASIAN AND PACIFIC ISLANDER', 'Charlotte', '59', '6']], 'page_size': 2, 'next_index': 7}
-bob@dylan:~$ 
+bob@dylan:~$
+```
 
-Repo:
-
-    GitHub repository: alx-backend
-    Directory: 0x00-pagination
-    File: 3-hypermedia_del_pagination.py
-
-Copyright © 2024 ALX, All rights reserved.
+solution - [3-hypermedia_del_pagination.py](./3-hypermedia_del_pagination.py)
